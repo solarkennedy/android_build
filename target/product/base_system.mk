@@ -264,7 +264,6 @@ PRODUCT_PACKAGES += \
     screencap \
     sdcard \
     secdiscard \
-    SecureElement \
     selinux_policy_system \
     sensorservice \
     service \
@@ -302,6 +301,14 @@ PRODUCT_PACKAGES += \
     wificond \
     wifi.rc \
     wm \
+
+# SecureElement (OMAPI service, com.android.se) runs as a persistent app but
+# needs an ISecureElement HAL (eSE or SIM-SE) to serve anything; devices
+# without one can exclude it.
+ifneq ($(TARGET_EXCLUDES_SECURE_ELEMENT),true)
+PRODUCT_PACKAGES += \
+    SecureElement
+endif
 
 ifeq ($(RELEASE_CROSS_DEVICE_SYNC),true)
   PRODUCT_PACKAGES += \
