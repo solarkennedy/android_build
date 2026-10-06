@@ -67,13 +67,18 @@ PRODUCT_PACKAGES += \
     PrivateSpace \
     ProxyHandler \
     screenrecord \
-    SecureElement \
     SharedStorageBackup \
     SimAppDialog \
     TeleService \
     UserDictionaryProvider \
     VpnDialogs \
     vr \
+
+# See base_system.mk — excluded on devices with no SE HAL.
+ifneq ($(TARGET_EXCLUDES_SECURE_ELEMENT),true)
+PRODUCT_PACKAGES += \
+    SecureElement
+endif
 
 ifeq ($(RELEASE_ACONFIG_INCLUDE_CONTACTS_PICKER_APP),true)
   PRODUCT_PACKAGES += ContactsPicker

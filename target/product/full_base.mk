@@ -20,8 +20,14 @@
 # in inherited configurations.
 
 PRODUCT_PACKAGES := \
-    libfwdlockengine \
+    libfwdlockengine
+
+# Legacy WAP Push (SI/SL/OMA-provisioning) router; nothing registers with it
+# on modern builds — devices can exclude it.
+ifneq ($(TARGET_EXCLUDES_WAPPUSH),true)
+PRODUCT_PACKAGES += \
     WAPPushManager
+endif
 
 PRODUCT_PACKAGES += \
     LiveWallpapersPicker \

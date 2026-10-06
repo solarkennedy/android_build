@@ -17,8 +17,14 @@
 # This is the list of modules that are specific to products that have telephony
 # hardware, and install on the system partition.
 
-PRODUCT_PACKAGES := \
-    ONS \
+# OpportunisticNetworkService only does anything with eUICC/CBRS support;
+# single-physical-SIM devices can exclude it.
+ifneq ($(TARGET_EXCLUDES_ONS),true)
+PRODUCT_PACKAGES += \
+    ONS
+endif
+
+PRODUCT_PACKAGES += \
     CarrierDefaultApp \
     CallLogBackup \
     com.android.cellbroadcast \
